@@ -1,0 +1,4 @@
+# Build output from build.sh
+Coffee.app/
+
+.DS_Store
