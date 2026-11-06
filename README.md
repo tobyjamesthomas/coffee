@@ -16,14 +16,16 @@ Coffee only appears in the menu bar. It has no Dock icon and no windows.
 
 ## Building
 
-You need macOS 11 or later and the Xcode Command Line Tools (`xcode-select --install`).
+You need the Xcode Command Line Tools (`xcode-select --install`).
 
 ```sh
 ./build.sh
 open Coffee.app
 ```
 
-This compiles `main.swift` into `Coffee.app` in the project folder. To keep it around, move `Coffee.app` to `/Applications`. To start it automatically, add it under **System Settings → General → Login Items**.
+This compiles `main.swift` into `Coffee.app` in the project folder. The app runs on Apple Silicon Macs with macOS 11 or later.
+
+To also build for Intel Macs, run `ARCHS="arm64 x86_64" ./build.sh`. This needs a toolchain that still includes Intel Swift libraries; the macOS 27 Command Line Tools no longer do. To keep it around, move `Coffee.app` to `/Applications`. To start it automatically, add it under **System Settings → General → Login Items**.
 
 ## How it works
 
@@ -43,8 +45,9 @@ pmset -g assertions | grep Coffee
 ## Project layout
 
 ```
-main.swift   The whole app: menu bar icon, click handling, power assertions
-build.sh     Compiles main.swift and packages it as Coffee.app
+main.swift               The whole app: menu bar icon, click handling, power assertions
+build.sh                 Compiles main.swift and packages it as Coffee.app
+scripts/make-icon.swift  Draws the app icon; build.sh runs it on every build
 ```
 
 ## License
